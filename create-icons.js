@@ -6,13 +6,13 @@
 const fs = require('fs');
 const path = require('path');
 
-// Créer une icône SVG simple comme placeholder
+// Créer une icône SVG simple comme placeholder (matching theme.js colors)
 const createSVGIcon = (size) => {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6c63ff"/>
-      <stop offset="100%" style="stop-color:#8b5cf6"/>
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#5568d3"/>
     </linearGradient>
   </defs>
   <rect width="${size}" height="${size}" rx="${size * 0.2}" fill="url(#bg)"/>

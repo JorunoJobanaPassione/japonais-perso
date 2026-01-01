@@ -18,10 +18,10 @@
             border: 1px solid #333;
             border-radius: 20%;
         }
-        h1 { color: #6c63ff; }
+        h1 { color: #667eea; }
         p { color: #888; }
         button {
-            background: #6c63ff;
+            background: #667eea;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -29,7 +29,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        button:hover { background: #8b5cf6; }
+        button:hover { background: #5568d3; }
     </style>
 </head>
 <body>
@@ -48,10 +48,10 @@
             canvas.height = size;
             const ctx = canvas.getContext('2d');
 
-            // Gradient background
+            // Gradient background (matching theme.js colors)
             const gradient = ctx.createLinearGradient(0, 0, size, size);
-            gradient.addColorStop(0, '#6c63ff');
-            gradient.addColorStop(1, '#8b5cf6');
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#5568d3');
 
             // Rounded rectangle
             const radius = size * 0.2;

@@ -3,27 +3,30 @@
    Dark Theme Mobile-First CSS
    ========================================= */
 
-/* CSS Variables */
+/* CSS Variables - Matching Commercial App Theme */
 :root {
-    /* Colors - Dark Theme */
-    --bg-primary: #0d0d1a;
-    --bg-secondary: #1a1a2e;
-    --bg-tertiary: #252542;
-    --bg-card: #1e1e3f;
-    --bg-card-hover: #2a2a4a;
+    /* Colors - Dark Theme (exact match with mobile app) */
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #1e2f4f;
+    --bg-card: #16213e;
+    --bg-card-hover: #1e2f4f;
 
-    /* Accent Colors */
-    --accent-primary: #6c63ff;
-    --accent-secondary: #a29bfe;
-    --accent-success: #00d9a5;
-    --accent-error: #ff6b6b;
-    --accent-warning: #ffd93d;
-    --accent-info: #74b9ff;
+    /* Accent Colors (from theme.js) */
+    --accent-primary: #667eea;
+    --accent-primary-dark: #5568d3;
+    --accent-primary-light: #8b9eff;
+    --accent-secondary: #8b9eff;
+    --accent-success: #4caf50;
+    --accent-error: #ff4757;
+    --accent-warning: #ffc107;
+    --accent-info: #2196f3;
+    --accent-gold: #ffd700;
 
-    /* Text Colors */
+    /* Text Colors (from theme.js) */
     --text-primary: #ffffff;
-    --text-secondary: #b8b8d0;
-    --text-muted: #6c6c8a;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
 
     /* Category Colors */
     --hiragana-color: #ff6b9d;
@@ -220,11 +223,12 @@ body {
    ========================================= */
 
 .welcome-card {
-    background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-dark));
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
     text-align: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .welcome-card h2 {
@@ -721,17 +725,17 @@ body {
 
 .option-btn.selected {
     border-color: var(--accent-primary);
-    background: rgba(108, 99, 255, 0.2);
+    background: rgba(102, 126, 234, 0.2);
 }
 
 .option-btn.correct {
     border-color: var(--accent-success);
-    background: rgba(0, 217, 165, 0.2);
+    background: rgba(76, 175, 80, 0.2);
 }
 
 .option-btn.incorrect {
     border-color: var(--accent-error);
-    background: rgba(255, 107, 107, 0.2);
+    background: rgba(255, 71, 87, 0.2);
 }
 
 .option-btn:disabled {
@@ -1380,7 +1384,7 @@ body {
 @media (prefers-color-scheme: light) {
     /* Override to keep dark theme regardless of system preference */
     :root {
-        --bg-primary: #0d0d1a;
-        --bg-secondary: #1a1a2e;
+        --bg-primary: #1a1a2e;
+        --bg-secondary: #16213e;
     }
 }
