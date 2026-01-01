@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Générateur d'icônes PWA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #333;
+            border-radius: 20%;
+        }
+        h1 { color: #6c63ff; }
+        p { color: #888; }
+        button {
+            background: #6c63ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover { background: #8b5cf6; }
+    </style>
+</head>
+<body>
+    <h1>Générateur d'icônes PWA - Japonais</h1>
+    <p>Cliquez sur chaque bouton pour télécharger l'icône correspondante.</p>
+    <p>Placez ensuite les fichiers PNG dans le dossier /icons/</p>
+
+    <div id="icons"></div>
+
+    <script>
+        const sizes = [32, 72, 96, 128, 144, 152, 167, 180, 192, 512];
+
+        function createIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#6c63ff');
+            gradient.addColorStop(1, '#8b5cf6');
+
+            // Rounded rectangle
+            const radius = size * 0.2;
+            ctx.beginPath();
+            ctx.moveTo(radius, 0);
+            ctx.lineTo(size - radius, 0);
+            ctx.quadraticCurveTo(size, 0, size, radius);
+            ctx.lineTo(size, size - radius);
+            ctx.quadraticCurveTo(size, size, size - radius, size);
+            ctx.lineTo(radius, size);
+            ctx.quadraticCurveTo(0, size, 0, size - radius);
+            ctx.lineTo(0, radius);
+            ctx.quadraticCurveTo(0, 0, radius, 0);
+            ctx.closePath();
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Japanese character 日
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.55}px "Noto Sans JP", sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('日', size / 2, size / 2 + size * 0.05);
+
+            return canvas;
+        }
+
+        function downloadIcon(size) {
+            const canvas = createIcon(size);
+            const link = document.createElement('a');
+            link.download = `icon-${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Generate previews
+        const container = document.getElementById('icons');
+        sizes.forEach(size => {
+            const div = document.createElement('div');
+            div.className = 'icon-preview';
+
+            const canvas = createIcon(Math.min(size, 192));
+            canvas.style.width = Math.min(size, 100) + 'px';
+            canvas.style.height = Math.min(size, 100) + 'px';
+
+            const btn = document.createElement('button');
+            btn.textContent = `Télécharger ${size}x${size}`;
+            btn.onclick = () => downloadIcon(size);
+
+            div.appendChild(document.createElement('br'));
+            div.appendChild(canvas);
+            div.appendChild(document.createElement('br'));
+            div.appendChild(btn);
+
+            container.appendChild(div);
+        });
+
+        // Download all button
+        const allBtn = document.createElement('button');
+        allBtn.textContent = '⬇️ Télécharger toutes les icônes';
+        allBtn.style.display = 'block';
+        allBtn.style.margin = '20px auto';
+        allBtn.style.fontSize = '18px';
+        allBtn.style.padding = '15px 30px';
+        allBtn.onclick = () => {
+            sizes.forEach((size, i) => {
+                setTimeout(() => downloadIcon(size), i * 200);
+            });
+        };
+        container.insertBefore(allBtn, container.firstChild);
+    </script>
+</body>
+</html>

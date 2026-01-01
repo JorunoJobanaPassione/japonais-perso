@@ -1,0 +1,85 @@
+{
+    "name": "Japonais - Apprentissage Personnel",
+    "short_name": "Japonais",
+    "description": "Apprends le japonais - Hiragana, Katakana, Kanji N5 - Version personnelle sans restrictions",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#0d0d1a",
+    "theme_color": "#1a1a2e",
+    "orientation": "portrait-primary",
+    "scope": "./",
+    "lang": "fr",
+    "categories": ["education", "lifestyle"],
+    "icons": [
+        {
+            "src": "icons/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-167.png",
+            "sizes": "167x167",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-180.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Révisions SRS",
+            "short_name": "SRS",
+            "description": "Commencer les révisions",
+            "url": "./index.html#srs",
+            "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+        },
+        {
+            "name": "Leçons",
+            "short_name": "Leçons",
+            "description": "Voir toutes les leçons",
+            "url": "./index.html#lessons",
+            "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+        }
+    ]
+}

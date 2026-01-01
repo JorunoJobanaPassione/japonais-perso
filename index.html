@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Japonais">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Apprends le Japonais - Hiragana, Katakana, Kanji N5">
+
+    <title>Japonais - Apprentissage Personnel</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+
+    <!-- Splash Screens iOS -->
+    <link rel="apple-touch-startup-image" href="icons/splash.png">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- App Container -->
+    <div id="app">
+        <!-- Header -->
+        <header id="header">
+            <div class="header-left">
+                <button id="back-btn" class="icon-btn hidden" aria-label="Retour">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <h1 id="page-title">Japonais</h1>
+            </div>
+            <div class="header-right">
+                <div id="streak-display" class="stat-badge">
+                    <span class="streak-icon">🔥</span>
+                    <span id="streak-count">0</span>
+                </div>
+                <div id="xp-display" class="stat-badge">
+                    <span class="xp-icon">⭐</span>
+                    <span id="xp-count">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Home Screen -->
+            <section id="home-screen" class="screen active">
+                <div class="welcome-card">
+                    <h2>Bienvenue !</h2>
+                    <p>Version personnelle - Accès illimité</p>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <span class="stat-value" id="home-lessons-done">0</span>
+                            <span class="stat-label">Leçons</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="home-chars-learned">0</span>
+                            <span class="stat-label">Caractères</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="home-kanji-learned">0</span>
+                            <span class="stat-label">Kanji</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-card" id="continue-btn">
+                        <div class="action-icon">📚</div>
+                        <div class="action-text">
+                            <span class="action-title">Continuer</span>
+                            <span class="action-desc" id="continue-desc">Reprendre l'apprentissage</span>
+                        </div>
+                    </button>
+                    <button class="action-card" id="srs-review-btn">
+                        <div class="action-icon">🧠</div>
+                        <div class="action-text">
+                            <span class="action-title">Révisions SRS</span>
+                            <span class="action-desc"><span id="srs-due-count">0</span> cartes à réviser</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Categories -->
+                <h3 class="section-title">Catégories</h3>
+                <div class="categories-grid">
+                    <button class="category-card" data-category="hiragana">
+                        <span class="category-char">あ</span>
+                        <span class="category-name">Hiragana</span>
+                        <span class="category-progress" id="hiragana-progress">0/10</span>
+                    </button>
+                    <button class="category-card" data-category="katakana">
+                        <span class="category-char">ア</span>
+                        <span class="category-name">Katakana</span>
+                        <span class="category-progress" id="katakana-progress">0/11</span>
+                    </button>
+                    <button class="category-card" data-category="vocabulary">
+                        <span class="category-char">語</span>
+                        <span class="category-name">Vocabulaire</span>
+                        <span class="category-progress" id="vocabulary-progress">0/6</span>
+                    </button>
+                    <button class="category-card" data-category="kanji">
+                        <span class="category-char">漢</span>
+                        <span class="category-name">Kanji N5</span>
+                        <span class="category-progress" id="kanji-progress">0/20</span>
+                    </button>
+                </div>
+
+                <!-- Daily Challenge -->
+                <div class="daily-card" id="daily-challenge-card">
+                    <div class="daily-header">
+                        <span class="daily-icon">🎯</span>
+                        <span class="daily-title">Défi du jour</span>
+                    </div>
+                    <div class="proverb-container">
+                        <p class="proverb-japanese" id="proverb-jp"></p>
+                        <p class="proverb-reading" id="proverb-reading"></p>
+                        <p class="proverb-meaning" id="proverb-meaning"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lessons List Screen -->
+            <section id="lessons-screen" class="screen">
+                <div class="lessons-header">
+                    <h2 id="lessons-category-title">Leçons</h2>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">Tout</button>
+                        <button class="filter-tab" data-filter="todo">À faire</button>
+                        <button class="filter-tab" data-filter="done">Terminé</button>
+                    </div>
+                </div>
+                <div id="lessons-list" class="lessons-list"></div>
+            </section>
+
+            <!-- Lesson Detail Screen -->
+            <section id="lesson-detail-screen" class="screen">
+                <div class="lesson-header-card">
+                    <h2 id="lesson-title">Titre</h2>
+                    <p id="lesson-description">Description</p>
+                    <div class="lesson-meta">
+                        <span class="meta-item" id="lesson-chars-count">0 caractères</span>
+                        <span class="meta-item" id="lesson-exercises-count">0 exercices</span>
+                    </div>
+                </div>
+
+                <div class="characters-section">
+                    <h3>Caractères</h3>
+                    <div id="characters-grid" class="characters-grid"></div>
+                </div>
+
+                <button id="start-exercises-btn" class="primary-btn">
+                    <span>Commencer les exercices</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </section>
+
+            <!-- Exercise Screen -->
+            <section id="exercise-screen" class="screen">
+                <div class="exercise-progress">
+                    <div class="progress-bar">
+                        <div id="exercise-progress-fill" class="progress-fill"></div>
+                    </div>
+                    <span id="exercise-counter">1/10</span>
+                </div>
+
+                <div id="exercise-container" class="exercise-container">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <div id="exercise-feedback" class="exercise-feedback hidden">
+                    <div class="feedback-icon"></div>
+                    <p class="feedback-text"></p>
+                    <p class="feedback-explanation"></p>
+                </div>
+
+                <button id="next-exercise-btn" class="primary-btn hidden">
+                    Suivant
+                </button>
+            </section>
+
+            <!-- SRS Review Screen -->
+            <section id="srs-screen" class="screen">
+                <div class="srs-header-card">
+                    <h2>Révisions SRS</h2>
+                    <p>Cartes à réviser aujourd'hui</p>
+                    <div class="srs-stats">
+                        <div class="srs-stat">
+                            <span class="srs-stat-value" id="srs-new">0</span>
+                            <span class="srs-stat-label">Nouvelles</span>
+                        </div>
+                        <div class="srs-stat">
+                            <span class="srs-stat-value" id="srs-learning">0</span>
+                            <span class="srs-stat-label">En cours</span>
+                        </div>
+                        <div class="srs-stat">
+                            <span class="srs-stat-value" id="srs-review">0</span>
+                            <span class="srs-stat-label">Révision</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="srs-card-container" class="srs-card-container">
+                    <div class="srs-card" id="srs-card">
+                        <div class="srs-card-front">
+                            <span class="srs-character" id="srs-character"></span>
+                        </div>
+                        <div class="srs-card-back hidden">
+                            <span class="srs-answer" id="srs-answer"></span>
+                            <span class="srs-reading" id="srs-reading"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="srs-show-btn" class="primary-btn">Montrer la réponse</button>
+
+                <div id="srs-buttons" class="srs-buttons hidden">
+                    <button class="srs-btn again" data-quality="0">
+                        <span class="srs-btn-label">À revoir</span>
+                        <span class="srs-btn-time">&lt;1min</span>
+                    </button>
+                    <button class="srs-btn hard" data-quality="2">
+                        <span class="srs-btn-label">Difficile</span>
+                        <span class="srs-btn-time" id="srs-hard-time">1j</span>
+                    </button>
+                    <button class="srs-btn good" data-quality="3">
+                        <span class="srs-btn-label">Bien</span>
+                        <span class="srs-btn-time" id="srs-good-time">3j</span>
+                    </button>
+                    <button class="srs-btn easy" data-quality="4">
+                        <span class="srs-btn-label">Facile</span>
+                        <span class="srs-btn-time" id="srs-easy-time">7j</span>
+                    </button>
+                </div>
+
+                <div id="srs-complete" class="srs-complete hidden">
+                    <div class="complete-icon">🎉</div>
+                    <h3>Révisions terminées !</h3>
+                    <p>Tu as révisé <span id="srs-reviewed-count">0</span> cartes</p>
+                    <button class="primary-btn" id="srs-back-home">Retour à l'accueil</button>
+                </div>
+            </section>
+
+            <!-- Character Detail Modal -->
+            <div id="character-modal" class="modal hidden">
+                <div class="modal-content">
+                    <button class="modal-close" id="close-modal">&times;</button>
+                    <div class="modal-character" id="modal-char"></div>
+                    <div class="modal-romaji" id="modal-romaji"></div>
+                    <div class="modal-mnemonic" id="modal-mnemonic"></div>
+                    <button class="audio-btn" id="modal-audio-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                        </svg>
+                        Écouter
+                    </button>
+                    <!-- Kanji specific info -->
+                    <div id="kanji-details" class="kanji-details hidden">
+                        <div class="kanji-readings">
+                            <div class="reading-section">
+                                <span class="reading-label">On'yomi:</span>
+                                <span id="modal-onyomi" class="reading-value"></span>
+                            </div>
+                            <div class="reading-section">
+                                <span class="reading-label">Kun'yomi:</span>
+                                <span id="modal-kunyomi" class="reading-value"></span>
+                            </div>
+                        </div>
+                        <div class="kanji-examples" id="modal-examples"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <section id="results-screen" class="screen">
+                <div class="results-card">
+                    <div class="results-icon" id="results-icon">🎉</div>
+                    <h2 id="results-title">Bravo !</h2>
+                    <p id="results-message">Tu as terminé la leçon</p>
+
+                    <div class="results-stats">
+                        <div class="result-stat">
+                            <span class="result-value" id="result-correct">0</span>
+                            <span class="result-label">Correct</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-value" id="result-total">0</span>
+                            <span class="result-label">Total</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="result-value" id="result-xp">0</span>
+                            <span class="result-label">XP gagnés</span>
+                        </div>
+                    </div>
+
+                    <div class="results-accuracy">
+                        <div class="accuracy-bar">
+                            <div id="accuracy-fill" class="accuracy-fill"></div>
+                        </div>
+                        <span id="accuracy-percent">0%</span>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="secondary-btn" id="retry-lesson-btn">Refaire</button>
+                    <button class="primary-btn" id="continue-learning-btn">Continuer</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav id="bottom-nav">
+            <button class="nav-item active" data-screen="home">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span>Accueil</span>
+            </button>
+            <button class="nav-item" data-screen="lessons" data-category="all">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+                </svg>
+                <span>Leçons</span>
+            </button>
+            <button class="nav-item" data-screen="srs">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                <span>SRS</span>
+            </button>
+            <button class="nav-item" data-screen="stats">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                <span>Stats</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="srs.js"></script>
+    <script src="exercises.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Register Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
